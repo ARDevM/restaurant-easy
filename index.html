@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesan Makanan dan Minuman</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Cafe</h1>
+    <header class="hdr">
+        <a href="#" onclick="showSection('homepage')">HOME PAGE</a>
+        <a href="#" onclick="showSection('food')">FOOD</a>
+        <a href="#" onclick="showSection('drink')">DRINK</a>
+        <a href="#" onclick="showSection('snack')">SNACK</a>
+    </header>
+    <div class="cart">
+        <a href="#" onclick="showSection('cart')">
+            <ion-icon name="cart-outline" size="large"></ion-icon>
+        </a>
+    </div>
+    <div id="cart" style="display: none;">
+        <h3>Keranjang Belanja</h3>
+        <ul class="cart-items-list">
+            <!-- Daftar item yang ada di keranjang akan muncul di sini -->
+        </ul>
+    </div>
+
+    <main>
+        <section id="homepage">
+            <div class="welcome-text">
+                <h2>Selamat Datang di Cafe</h2>
+                <p>Nikmati hidangan lezat dan minuman segar kami.</p>
+            </div>
+        </section>
+
+        <section id="food">
+            <div class="product-item">
+                <div class="product-card">
+                    <img src="img/hamburger.png" alt="food">
+                    <button class="btn" onclick="addItemToCart('Hamburger', 'hamburger')">+Tambahkan</button>
+                </div>
+                <div class="product-card">
+                    <img src="img/banana.png" alt="food">
+                     <button class="btn" onclick="addItemToCart('banana')">+Tambahkan</button>
+                </div>
+                <div class="product-card">
+                    <img src="img/taco.png" alt="food">
+                     <button class="btn" onclick="addItemToCart('taco')">+Tambahkan</button>
+                </div>
+                <div class="product-card">
+                    <img src="img/sushi.png" alt="food">
+                     <button class="btn" onclick="addItemToCart('sushi')">+Tambahkan</button>
+                </div>
+                <div class="product-card">
+                    <img src="img/sandwich.png" alt="food">
+                     <button class="btn" onclick="addItemToCart('sandwich')">+Tambahkan</button>
+                </div>
+                <div class="product-card">
+                    <img src="img/food.png" alt="food">
+                     <button class="btn" onclick="addItemToCart('food')">+Tambahkan</button>
+                </div>
+                <div class="product-card">
+                    <img src="img/pizza.png" alt="food">
+                     <button class="btn" onclick="addItemToCart('pizza')">+Tambahkan</button>
+                </div>
+                <div class="product-card">
+                    <img src="img/spare-ribs.png" alt="food">
+                     <button class="btn" onclick="addItemToCart('spare-ribs')">+Tambahkan</button>
+                </div>
+                <div class="product-card">
+                    <img src="img/onion-rings.png" alt="food">
+                     <button class="btn" onclick="addItemToCart('onion-rings')">+Tambahkan</button>
+                </div>
+                <div class="product-card">
+                    <img src="img/hotdog.png" alt="food">
+                     <button class="btn" onclick="addItemToCart('hotdog')">+Tambahkan</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="drink">
+            <div class="product-item">
+                <div class="product-card">
+                    <img src="img/tea.png" alt="food">
+                     <button class="btn" onclick="addItemToCart('tea')">+Tambahkan</button>
+                </div>
+                <div class="product-card">
+                    <img src="img/coconut.png" alt="food">
+                     <button class="btn" onclick="addItemToCart('coconut')">+Tambahkan</button>
+                </div>
+                <div class="product-card">
+                    <img src="img/drink.png" alt="food">
+                     <button class="btn" onclick="addItemToCart('drink')">+Tambahkan</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="snack">
+            <div class="product-item">
+                <div class="product-card">
+                    <img src="img/oranges.png" alt="food">
+                     <button class="btn" onclick="addItemToCart('oranges')">+Tambahkan</button>
+                </div>
+                <div class="product-card">
+                    <img src="img/apples.png" alt="food">
+                     <button class="btn" onclick="addItemToCart('apples')">+Tambahkan</button>
+                </div>
+                <div class="product-card">
+                    <img src="img/cherry.png" alt="food">
+                     <button class="btn" onclick="addItemToCart('cherry')">+Tambahkan</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="cart_cafe">
+            <h3>Keranjang Belanja</h3>
+            <ul class="cart-items-list">
+            </ul>
+        </section>
+    </main>
+    </main>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            showSection('homepage');
+        });
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
+
+            const cartSection = document.getElementById('cart_cafe');
+
+            if (sectionId === 'cart') {
+                cartSection.style.display = 'block';
+            } else {
+                const sectionToShow = document.getElementById(sectionId);
+                if (sectionToShow) {
+                    sectionToShow.style.display = 'block';
+                }
+            }
+        }
+        function addItemToCart(itemName, itemId) {
+            cartItems.push({ name: itemName, id: itemId });
+            updateCartCount();
+        }
+
+        function updateCartCount() {
+        const cartIcon = document.querySelector('.cart ion-icon');
+        cartIcon.setAttribute('name', 'cart-outline');
+
+        const cartCountElement = cartIcon.nextElementSibling;
+        cartCountElement.textContent = cartItems.length;
+
+        const cartList = document.querySelector('.cart-items-list');
+        cartList.innerHTML = '';
+
+        cartItems.forEach(item => {
+            const itemElement = document.createElement('li');
+            const itemImage = document.createElement('img');
+            itemImage.src = `img/${item.id}.png`;  
+            itemImage.alt = item.name;
+            itemElement.appendChild(itemImage);
+            itemElement.textContent = item.name;
+            cartList.appendChild(itemElement);
+        });
+    }
+    </script>
+</body>
+</html>
